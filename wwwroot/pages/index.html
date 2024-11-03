@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Загрузка данных аккаунтов</title>
+    <link href="../styles/style.css" rel="stylesheet">
+</head>
+<body>
+    <div class="left-panel">
+        <h2>Загрузка файла</h2>
+        <input type="file" id="fileInput" />
+        <button id="uploadButton">Отправить файл</button>
+        <div class="file-info">
+            <h3>Информация о файле</h3>
+            <p><strong>Название:</strong> <span id="fileName"></span></p>
+            <p><strong>Дата создания:</strong> <span id="fileCreationDate"></span></p>
+            <p><strong>Дата изменения:</strong> <span id="fileModificationDate"></span></p>
+            <p><strong>Размер:</strong> <span id="fileSize"></span></p>
+        </div>
+    </div>
+    <div class="right-panel">
+        <h2>Список загруженных файлов</h2>
+        <ul class="file-list" id="fileList"></ul>
+    </div>
+
+    <script src="../scripts/startPage.js"></script>
+</body>
+</html>

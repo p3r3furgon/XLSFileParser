@@ -1,0 +1,51 @@
+﻿body {
+    font-family: "Times New Roman", sans-serif;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 20px;
+}
+
+.left-panel, .right-panel {
+    flex-grow: 1;
+    height: 850px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.left-panel {
+    border-right: 2px solid;
+}
+
+.right-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h2 {
+    margin-top: 0;
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.file-info {
+    margin-top: 20px;
+    border: 1px solid;
+    padding: 10px;
+    border-radius: 5px;
+    width: 30%;
+}
+
+.file-list {
+    list-style: none;
+    padding: 0;
+}
+
+    .file-list li {
+        width: auto;
+        padding: 5px;
+        border: 2px solid;
+        margin: 5px;
+        border-radius: 5px;
+    }
