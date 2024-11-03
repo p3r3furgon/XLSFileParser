@@ -3,37 +3,37 @@ using B1Task2.DataAccess;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace B1Task2.UseCases.GetAccountsByFileName
+namespace B1Task2.UseCases.GetAccountsByFileId
 {
-    public class GetAccountsByFileNameRequestHandler :
-        IRequestHandler<GetAccountsByFileNameRequest, GetAccountsByFileNameResponse>
+    public class GetAccountsByFileIdRequestHandler :
+        IRequestHandler<GetAccountsByFileIdRequest, GetAccountsByFileIdResponse>
     {
         private readonly BankDataContext _context;
         private readonly IMapper _mapper;
 
-        public GetAccountsByFileNameRequestHandler(BankDataContext context, IMapper mapper)
+        public GetAccountsByFileIdRequestHandler(BankDataContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
         }
-        public async Task<GetAccountsByFileNameResponse> Handle(GetAccountsByFileNameRequest request, 
+        public async Task<GetAccountsByFileIdResponse> Handle(GetAccountsByFileIdRequest request, 
             CancellationToken cancellationToken)
         {
             try 
             {
                 var accounts = await _context.Accounts
-                    .Where(a => a.Class.Source.SourceType == request.FileName)
+                    .Where(a => a.Class.Source.Id == request.FileId)
                     .Include(a => a.Class)
                     .Include(a => a.Elements)
                     .ToListAsync();
 
                 var accountsInfoDtos = _mapper.Map<List<AccountInfoDto>>(accounts);
 
-                return new GetAccountsByFileNameResponse(true, string.Empty, accountsInfoDtos);
+                return new GetAccountsByFileIdResponse(true, string.Empty, accountsInfoDtos);
             }
             catch(Exception ex)
             {
-                return new GetAccountsByFileNameResponse(false, ex.Message, null);
+                return new GetAccountsByFileIdResponse(false, ex.Message, null);
             }
         }
     }

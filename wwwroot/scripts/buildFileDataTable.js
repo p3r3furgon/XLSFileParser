@@ -7,8 +7,8 @@
 
 async function fetchData(elementTypes, summaryData) {
     try {
-        fileName = getFileNameFromURL();
-        const response = await fetch(`http://localhost:5000/BankData/${fileName}`);
+        fileId = getFileNameFromURL();
+        const response = await fetch(`http://localhost:5000/BankData/${fileId}`);
         if (!response.ok) {
             throw new Error();
         }
@@ -33,8 +33,8 @@ async function fetchElementTypes() {
 
 async function fetchSummaryData(){
     try {
-        fileName = getFileNameFromURL();
-        const response = await fetch(`http://localhost:5000/BankData/${fileName}/summary`);
+        fileId = getFileNameFromURL();
+        const response = await fetch(`http://localhost:5000/BankData/${fileId}/summary`);
         if (!response.ok) {
             throw new Error();
         }
@@ -135,5 +135,5 @@ function createDataRow(account, elementTypes) {
 }
 function getFileNameFromURL() {
     const params = new URLSearchParams(window.location.search);
-    return params.get('file');
+    return params.get('fileid');
 }

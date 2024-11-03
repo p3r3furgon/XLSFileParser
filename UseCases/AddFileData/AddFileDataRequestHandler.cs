@@ -2,6 +2,8 @@
 using B1Task2.Interfaces;
 using B1Task2.Models;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace B1Task2.UseCases.AddFileData
 {
@@ -61,11 +63,17 @@ namespace B1Task2.UseCases.AddFileData
 
                 await _context.SaveChangesAsync();
 
-                return new AddFileDataResponse(true, string.Empty);
+                var fileId = await _context.Accountsources
+                    .Where(s => s.SourceType == accountSource.SourceType && s.UploadDate == accountSource.UploadDate)
+                    .OrderBy(s => s)
+                    .Select(s => s.Id)
+                    .LastOrDefaultAsync();
+
+                return new AddFileDataResponse(true, string.Empty, fileId);
             }
             catch(Exception ex)
             {
-                return new AddFileDataResponse(false, ex.Message);
+                return new AddFileDataResponse(false, ex.Message, default(int));
             }
         }
     }

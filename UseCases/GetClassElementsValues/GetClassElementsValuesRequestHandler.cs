@@ -18,7 +18,7 @@ namespace B1Task2.UseCases.GetClassElementsValues
             try
             {
                 var data = await _context.Accounts
-                    .Where(a => a.Class.Source.SourceType == request.FileName)
+                    .Where(a => a.Class.Source.Id == request.FileId)
                     .Include(a => a.Elements)
                     .Include(a => a.Class)
                     .GroupBy(a => a.Class.ClassCode)

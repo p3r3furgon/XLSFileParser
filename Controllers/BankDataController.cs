@@ -1,7 +1,7 @@
 ﻿using B1Task2.DataAccess;
 using B1Task2.UseCases.AddFileData;
-using B1Task2.UseCases.DeleteAccountsByFileName;
-using B1Task2.UseCases.GetAccountsByFileName;
+using B1Task2.UseCases.DeleteAccountsByFileId;
+using B1Task2.UseCases.GetAccountsByFileId;
 using B1Task2.UseCases.GetClassElementsValues;
 using B1Task2.UseCases.GetElementTypes;
 using B1Task2.UseCases.GetFiles;
@@ -75,12 +75,12 @@ namespace B1Task2.Controllers
         /// <summary>
         /// Метод получения данных аккаунтов по названию файла
         /// </summary>
-        /// <param name="fileName">Название файла</param>
+        /// <param name="fileId">Id файла</param>
         /// <returns>Возвращает список аккаунтов</returns>
-        [HttpGet("{fileName}")]
-        public async Task<IActionResult> GetAccountsByFileName(string fileName)
+        [HttpGet("{fileId}")]
+        public async Task<IActionResult> GetAccountsByFileName(int fileId)
         {
-            var response = await _mediator.Send(new GetAccountsByFileNameRequest(fileName));
+            var response = await _mediator.Send(new GetAccountsByFileIdRequest(fileId));
 
             if (!response.IsSuccess)
                 return StatusCode(StatusCodes.Status400BadRequest, response);
@@ -91,12 +91,12 @@ namespace B1Task2.Controllers
         /// <summary>
         /// Метод получения суммарных данных по классам по названию файла
         /// </summary>
-        /// <param name="fileName">Название файла</param>
+        /// <param name="fileId">Id файла</param>
         /// <returns>Возвращает словарь суммарных данных по классам</returns>
-        [HttpGet("{fileName}/summary")]
-        public async Task<IActionResult> Test(string fileName)
+        [HttpGet("{fileId}/summary")]
+        public async Task<IActionResult> Test(int fileId)
         {
-            var response = await _mediator.Send(new GetClassElementsValuesRequest(fileName));
+            var response = await _mediator.Send(new GetClassElementsValuesRequest(fileId));
 
             if (!response.IsSuccess)
                 return StatusCode(StatusCodes.Status400BadRequest, response);
@@ -107,13 +107,13 @@ namespace B1Task2.Controllers
         /// <summary>
         /// Удаляет аккаунты по названию их файла-источника
         /// </summary>
-        /// <param name="fileName">Название файла</param>
+        /// <param name="fileId">Id файла</param>
         /// <returns>Возвращает успешность выполнения запроса(IsSuccess). В случае IsSuccess = false, 
         /// свойство Message содержит строку с описанием ошибки</returns>
-        [HttpDelete("{fileName}")]
-        public async Task<IActionResult> DeleteAccountsByFileName(string fileName)
+        [HttpDelete("{fileId}")]
+        public async Task<IActionResult> DeleteAccountsByFileName(int fileId)
         {
-            var response = await _mediator.Send(new DeleteAccountsByFileNameRequest(fileName));
+            var response = await _mediator.Send(new DeleteAccountsByFileIdRequest(fileId));
 
             if (!response.IsSuccess)
                 return StatusCode(StatusCodes.Status400BadRequest, response);

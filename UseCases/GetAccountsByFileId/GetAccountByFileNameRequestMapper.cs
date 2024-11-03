@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
 using B1Task2.Models;
 
-namespace B1Task2.UseCases.GetAccountsByFileName
+namespace B1Task2.UseCases.GetAccountsByFileId
 {
-    public class GetAccountByFileNameMapper : Profile
+    public class GetAccountByFileNameRequestMapper : Profile
     {
-        public GetAccountByFileNameMapper()
+        public GetAccountByFileNameRequestMapper()
         {
             CreateMap<Account, AccountInfoDto>()
             .ForMember(dest => dest.AccountCode, opt => opt.MapFrom(c => c.AccountCode))

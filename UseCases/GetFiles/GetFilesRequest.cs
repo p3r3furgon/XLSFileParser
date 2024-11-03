@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using System.Runtime.CompilerServices;
 
 namespace B1Task2.UseCases.GetFiles
 {
@@ -9,6 +8,7 @@ namespace B1Task2.UseCases.GetFiles
 
     public class FileDto
     {
+        public int fileId { get; set; }
         public string fileName { get; set; } = string.Empty;
         public DateTime? dateAdded { get; set; }
     }

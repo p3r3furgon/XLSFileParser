@@ -1,11 +1,11 @@
 ﻿using B1Task2.Models;
 using MediatR;
 
-namespace B1Task2.UseCases.GetAccountsByFileName
+namespace B1Task2.UseCases.GetAccountsByFileId
 {
-    public record GetAccountsByFileNameRequest(string FileName): 
-        IRequest<GetAccountsByFileNameResponse>;
-    public record GetAccountsByFileNameResponse(bool IsSuccess, string Message, List<AccountInfoDto> Accounts);
+    public record GetAccountsByFileIdRequest(int FileId): 
+        IRequest<GetAccountsByFileIdResponse>;
+    public record GetAccountsByFileIdResponse(bool IsSuccess, string Message, List<AccountInfoDto> Accounts);
 
     public class AccountInfoDto
     { 

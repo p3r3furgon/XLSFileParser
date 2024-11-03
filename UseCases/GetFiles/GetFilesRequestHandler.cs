@@ -1,4 +1,5 @@
-﻿using B1Task2.DataAccess;
+﻿using AutoMapper;
+using B1Task2.DataAccess;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,10 +8,11 @@ namespace B1Task2.UseCases.GetFiles
     public class GetFilesRequestHandler: IRequestHandler<GetFilesRequest, GetFilesResponse>
     {
         private readonly BankDataContext _context;
-
-        public GetFilesRequestHandler(BankDataContext context)
+        private readonly IMapper _mapper;
+        public GetFilesRequestHandler(BankDataContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
         public async Task<GetFilesResponse> Handle(GetFilesRequest request, CancellationToken cancellationToken1)
         {
@@ -18,13 +20,11 @@ namespace B1Task2.UseCases.GetFiles
             {
                 var files = await _context.Accountsources
                     .OrderByDescending(s => s.UploadDate)
-                    .Select(file => new FileDto()
-                    {
-                        fileName = file.SourceType,
-                        dateAdded = file.UploadDate
-                    }).ToListAsync(cancellationToken1);
+                    .ToListAsync(cancellationToken1);
 
-                return new GetFilesResponse(true, string.Empty, files);
+                var filesDto = _mapper.Map<List<FileDto>>(files);
+
+                return new GetFilesResponse(true, string.Empty, filesDto);
             }
             catch(Exception ex)
             {

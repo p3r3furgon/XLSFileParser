@@ -3,7 +3,7 @@ using MediatR;
 
 namespace B1Task2.UseCases.GetClassElementsValues
 {
-    public record GetClassElementsValuesRequest(string FileName)
+    public record GetClassElementsValuesRequest(int FileId)
         : IRequest<GetClassElementsValuesResponse>;
     public record GetClassElementsValuesResponse(bool IsSuccess, string Message, Dictionary<int, List<ElementDto>> ClassElements);
 
