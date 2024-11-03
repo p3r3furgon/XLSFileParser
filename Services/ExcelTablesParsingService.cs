@@ -162,7 +162,7 @@ namespace B1Task2.Services
 
         /// <summary>
         /// Парсит список строк с информацией про элементы в 3ой вложенный список(для отдельных классов и аккаунтов) 
-        /// элементов типа Elements
+        /// элементов типа Element
         /// </summary>
         /// <returns>3ой вложенный список элементов типа Element</returns>
         public List<List<List<Element>>> ParseElements(List<List<List<string>>> data)

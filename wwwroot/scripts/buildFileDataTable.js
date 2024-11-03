@@ -1,6 +1,6 @@
 ﻿document.addEventListener('DOMContentLoaded', async () => {
-    const elementTypes = await fetchElementTypes();
-    const summaryData = await fetchSummaryData();
+    let elementTypes = await fetchElementTypes();
+    let summaryData = await fetchSummaryData();
 
     await fetchData(elementTypes, summaryData);
 });
@@ -13,7 +13,7 @@ async function fetchData(elementTypes, summaryData) {
             throw new Error();
         }
         const data = await response.json();
-        createTable(data["accounts"], elementTypes, summaryData);
+        createTable(data["accounts"], elementTypes.elementTypes, summaryData);
     } catch (error) {
         console.error('Ошибка при получении данных:', error.message);
     }
@@ -45,10 +45,9 @@ async function fetchSummaryData(){
 }
 
 function createTable(data, elementTypes, summaryData) {
-
+    console.log(elementTypes)
     const groupedData = groupDataByClass(data);
     const container = document.getElementById('data-container');
-    console.log(groupedData);
     for (const classCode in groupedData) {
         const classItems = groupedData[classCode];
         const classDiv = document.createElement('div');
